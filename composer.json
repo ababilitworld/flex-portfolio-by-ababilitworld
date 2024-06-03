@@ -15,26 +15,22 @@
             "name": "Md Shafiul Alam",
             "email": "cse.shafiul@gmail.com",
             "homepage": "https://ababilitworld.com/"
-        },
-        {
-            "name": "Premium Addons",
-            "email": "premiumaddonsforyou@gmail.com",
-            "homepage": "https://ababilitworld.com/"
         }
     ],
     "require": {
         "php": ">=7.4",
-        "wordpress": ">=5.2"
-        
+        "wordpress": ">=5.2",
+        "ababilitworld/flex-trait-by-ababilitworld": ">=1.0.0",
+        "ababilitworld/flex-pagination-by-ababilitworld": ">=1.0.0"        
     },
     "autoload": {
         "psr-4": {
-            "Ababilitworld\\FlexPortfolioByAbabilitworld\\": "src/"
+            "Ababilitworld\\FlexPortfolioByAbabilitworld\\Package\\": "src/Package/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Ababilitworld\\FlexPortfolioByAbabilitworld\\Tests\\": "tests/"
+            "Ababilitworld\\FlexPortfolioByAbabilitworld\\Package\\Tests\\": "tests/"
         }
     },
     "extra": { 

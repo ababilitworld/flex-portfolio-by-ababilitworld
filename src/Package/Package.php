@@ -1,17 +1,28 @@
 <?php
-    namespace Ababilitworld\FlexPortfolioByAbabilitworld;
+    namespace Ababilitworld\FlexPortfolioByAbabilitworld\Package;
 
-    (defined( 'ABSPATH' ) && defined( 'WPINC' )) || die();
+    (defined( 'ABSPATH' ) && defined( 'WPINC' )) || exit();
 
-    use function AbabilItWorld\{
-		Core\Library\Function\wp_error_handler,
-		Core\Library\Function\wp_function
+	use Ababilitworld\FlexTraitByAbabilitworld\Trait\StaticTrait\StaticTrait;
+
+	use const AbabilItWorld\FlexPortfolioByAbabilitworld\{
+		PLUGIN_NAME,
+		PLUGIN_DIR,
+        PLUGIN_URL,
+		PLUGIN_VERSION
 	};
 
-	if ( ! class_exists( '\AbabilItWorld\FlexPortfolioByAbabilitworld\Plugin' ) ) 
+	if ( ! class_exists( '\AbabilItWorld\FlexPortfolioByAbabilitworld\Package\Package' ) ) 
 	{
-		class Plugin 
+		/**
+		 * Class Package
+		 *
+		 * @package AbabilItWorld\FlexPortfolioByAbabilitworld\Package
+		 */
+		class Package 
 		{
+			use StaticTrait;
+
 			/**
 			 * Objcet wp_error
 			 *
@@ -27,7 +38,7 @@
 			private $wp_function;
 	
 			/**
-			 * Plugin version
+			 * Package version
 			 *
 			 * @var string
 			 */
@@ -38,28 +49,7 @@
 			 */
 			public function __construct() 
 			{
-				$this->wp_error = wp_error_handler();
-                $this->wp_function = wp_function();
-				register_deactivation_hook(PLUGIN_FILE, array($this, 'deactivate'));
-				register_uninstall_hook(PLUGIN_FILE, array('self', 'uninstall'));
-                
-			}
-	
-			/**
-			 * Initializes the class
-			 *
-			 * Create instance if not exist.
-			 */
-			public static function instance() 
-			{
-				static $instance = false;
-	
-				if ( ! $instance ) 
-				{
-					$instance = new self();
-				}
-	
-				return $instance;
+				register_uninstall_hook(PLUGIN_FILE, array('self', 'uninstall'));                
 			}
 	
 			/**
@@ -101,31 +91,29 @@
 			}
 	
 			/**
-			 * Uninstall The class
+			 * Uninstall the plugin
 			 *
 			 * @return void
 			 */
 			public static function uninstall(): void 
 			{
+				delete_option(PLUGIN_NAME . '-installed');
+				delete_option(PLUGIN_NAME . '-version');
 				flush_rewrite_rules();
 			}
 	
 		}
 
-        //new Plugin();
-	
 		/**
 		 * Return the instance
 		 *
-		 * @return \AbabilItWorld\FlexPortfolioByAbabilitworld\Plugin
+		 * @return \AbabilItWorld\FlexPortfolioByAbabilitworld\Package\Package
 		 */
-		function plugin() 
+		function package() 
 		{
-			return Plugin::instance();
+			return Package::instance();
 		}
-	
-		// take off
-		//plugin();
+
 	}
 	
 ?>
