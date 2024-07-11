@@ -4,7 +4,7 @@ namespace Ababilitworld\FlexPaginationByAbabilitworld\Package\Presentation;
 
 (defined('ABSPATH') && defined('WPINC')) || die();
 
-use Ababilitworld\FlexTraitByAbabilitworld\Trait\StaticTrait\StaticTrait;
+use Ababilitworld\FlexTraitByAbabilitworld\Standard\Standard;
 use function Ababilitworld\{
     FlexPackageInfoByAbabilitworld\Package\Service\service as plugin_info,
     FlexPaginationByAbabilitworld\Package\package as package,
@@ -14,7 +14,7 @@ if (!class_exists('\Ababilitworld\FlexPaginationByAbabilitworld\Package\Presenta
 {
     class Presentation 
     {
-        use StaticTrait;
+        use Standard;
 
         private $package;
 

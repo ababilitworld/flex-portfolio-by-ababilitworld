@@ -3,7 +3,7 @@ namespace Ababilitworld\FlexPortfolioByAbabilitworld\Package\Presentation\Templa
 
 (defined('ABSPATH') && defined('WPINC')) || die();
 
-use Ababilitworld\FlexTraitByAbabilitworld\Trait\StaticTrait\StaticTrait;
+use Ababilitworld\FlexTraitByAbabilitworld\Standard\Standard;
 use function Ababilitworld\{
     FlexPackageInfoByAbabilitworld\Package\Service\service as plugin_info,
     FlexPortfolioByAbabilitworld\Package\package as package,
@@ -13,7 +13,7 @@ if (!class_exists('\Ababilitworld\FlexPortfolioByAbabilitworld\Package\Presentat
 {
     class Template 
     {
-        use StaticTrait;
+        use Standard;
 
         private $package;
         private $template_url;

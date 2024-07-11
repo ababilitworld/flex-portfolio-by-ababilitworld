@@ -3,16 +3,17 @@
 
     (defined( 'ABSPATH' ) && defined( 'WPINC' )) || exit();
 
-	use Ababilitworld\FlexTraitByAbabilitworld\Trait\StaticTrait\StaticTrait;
+	use Ababilitworld\FlexTraitByAbabilitworld\Standard\Standard;
     use Ababilitworld\FlexPaginationByAbabilitworld\Package\Abstract\Pagination;
 	use const AbabilItWorld\FlexPortfolioByAbabilitworld\{
 		PLUGIN_NAME,
 		PLUGIN_DIR,
         PLUGIN_URL,
+		PLUGIN_FILE,
 		PLUGIN_VERSION
 	};
     use function Ababilitworld\{
-        FlexPortfolioByAbabilitworld\Package\Portfolio\Presentation\Template\template as pagination_template,
+        FlexPortfolioByAbabilitworld\Package\Presentation\Pagination\Template\template as pagination_template,
     };
 
 	if ( ! class_exists( '\AbabilItWorld\FlexPortfolioByAbabilitworld\Package\Portfolio\Helper\Helper' ) ) 
@@ -24,7 +25,7 @@
 		 */
 		class Helper extends Pagination
 		{
-			use StaticTrait;
+			use Standard;
 
 			/**
 			 * Objcet wp_error

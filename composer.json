@@ -5,6 +5,7 @@
     "keywords": ["portfolio", "plugin", "wordpress"],
     "homepage": "https://ababilitworld.com/wp-plugin/flex-portfolio-by-ababilitworld",
     "license": "GPL-3.0-or-later",
+    "license_uri": "https://www.gnu.org/licenses/gpl-3.0.html",
     "authors": [
         {
             "name": "Ababil IT World",
@@ -17,12 +18,6 @@
             "homepage": "https://ababilitworld.com/"
         }
     ],
-    "require": {
-        "php": ">=7.4",
-        "wordpress": ">=5.2",
-        "ababilitworld/flex-trait-by-ababilitworld": ">=1.0.0",
-        "ababilitworld/flex-pagination-by-ababilitworld": ">=1.0.0"        
-    },
     "autoload": {
         "psr-4": {
             "Ababilitworld\\FlexPortfolioByAbabilitworld\\Package\\": "src/Package/"
@@ -39,15 +34,12 @@
             "uri": "https://ababilitworld.com/wp-plugin/flex-portfolio-by-ababilitworld",
             "description": "The Flexible Portfolio Manager for WordPress, Exclusively by Ababil IT World.",
             "version": "1.0.0",
-            "requires": {
-                "php": ">=7.4",
-                "wordpress": ">=5.2"
-            },
             "tested": "6.5",
             "author": "Ababil IT World",
             "author_uri": "https://ababilitworld.com/",
             "author_email": "ababilitworld@gmail.com",
             "license": "GPL-3.0-or-later",
+            "license_uri": "https://www.gnu.org/licenses/gpl-3.0.html",
             "text_domain": "flex-portfolio-by-ababilitworld",
             "domain_path": "/language",
             "namespace": "FlexPortfolioByAbabilitworld",

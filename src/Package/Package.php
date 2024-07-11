@@ -3,12 +3,13 @@
 
     (defined( 'ABSPATH' ) && defined( 'WPINC' )) || exit();
 
-	use Ababilitworld\FlexTraitByAbabilitworld\Trait\StaticTrait\StaticTrait;
+	use Ababilitworld\FlexTraitByAbabilitworld\Standard\Standard;
 
 	use const AbabilItWorld\FlexPortfolioByAbabilitworld\{
 		PLUGIN_NAME,
 		PLUGIN_DIR,
         PLUGIN_URL,
+		PLUGIN_FILE,
 		PLUGIN_VERSION
 	};
 
@@ -21,7 +22,7 @@
 		 */
 		class Package 
 		{
-			use StaticTrait;
+			use Standard;
 
 			/**
 			 * Objcet wp_error
@@ -111,7 +112,7 @@
 		 */
 		function package() 
 		{
-			return Package::instance();
+			return \AbabilItWorld\FlexPortfolioByAbabilitworld\Package\Package::instance();
 		}
 
 	}
