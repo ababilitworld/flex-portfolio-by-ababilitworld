@@ -13,6 +13,12 @@
 		PLUGIN_VERSION
 	};
 
+	use function AbabilItWorld\{
+
+		FlexPortfolioByAbabilitworld\Package\Portfolio\portfolio as portfolio,
+		
+	};
+
 	if ( ! class_exists( '\AbabilItWorld\FlexPortfolioByAbabilitworld\Package\Package' ) ) 
 	{
 		/**
@@ -44,13 +50,21 @@
 			 * @var string
 			 */
 			public $version = '1.0.0';
+
+			private $portfolio;
 	
 			/**
 			 * Constructor
 			 */
 			public function __construct() 
 			{
+				$this->init();
 				register_uninstall_hook(PLUGIN_FILE, array('self', 'uninstall'));                
+			}
+
+			public function init()
+			{
+				$this->portfolio  = portfolio();
 			}
 	
 			/**
@@ -102,6 +116,10 @@
 				delete_option(PLUGIN_NAME . '-version');
 				flush_rewrite_rules();
 			}
+
+			
+
+			
 	
 		}
 

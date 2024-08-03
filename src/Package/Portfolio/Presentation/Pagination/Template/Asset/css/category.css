@@ -1,0 +1,36 @@
+/*********************************************************Portfolio Catagory List*******************************************/
+.stmfs .category-container {
+    margin: 20px 0;
+}
+
+.stmfs .category-container .category-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.stmfs .category-container .category-list li {
+    margin: 5px;
+}
+
+.stmfs .category-container .category-list li a {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 50px;
+    background-color: #f1f1f1;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.stmfs .category-container .category-list li a:hover {
+    background-color: #0073aa;
+    color: #fff;
+}
+
+.stmfs .category-container .category-list a.active {
+    background-color: #0073aa;
+    color: #fff;
+}

@@ -34,6 +34,8 @@
 	 */
 	namespace AbabilItWorld\FlexPortfolioByAbabilitworld;
 
+use XYZPortfolio\Portfolio\Portfolio;
+
 	(defined('ABSPATH') && defined('WPINC')) || die();
 
 	require_once __DIR__ . '/bootstrap.php';
@@ -51,7 +53,7 @@
 		FlexPortfolioByAbabilitworld\Package\package,
 	};
 	
-	$package = package();	
+	$package = package();
 		
 	register_activation_hook(__FILE__, [$package, 'activate']);
 	register_deactivation_hook(__FILE__, [$package, 'deactivate']);

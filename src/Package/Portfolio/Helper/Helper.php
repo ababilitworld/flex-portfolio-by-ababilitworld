@@ -69,6 +69,35 @@
                 $this->paginationLinks = $this->pagination_links();
             }
 
+            public static function wp_query($attribute) 
+            {
+                $args = array(
+                    'post_type'      => $attribute['post_type'],
+                    'posts_per_page' => $attribute['posts_per_page'],
+                    'paged'          => $attribute['paged'],
+                    'orderby'        => $attribute['orderby'],
+                    'order'          => $attribute['order'],
+                );
+
+				if (isset($attribute['category']) && !empty($attribute['category'])) 
+				{
+					$args['category_name'] = $attribute['category'];
+				}
+
+				if (isset($attribute['category_id']) && !empty($attribute['category_id'])) 
+				{
+					$args['tax_query'] = array(
+						array(
+							'taxonomy' => 'category',
+							'field' => 'term_id',
+							'terms' => $attribute['category_id'],
+						),
+					);
+				}
+
+                return new \WP_Query($args);
+			}
+
             /**
              * Paginate the query results.
              */
@@ -126,8 +155,6 @@
             }
 	
 		}
-
-        //new Helper();
 	
 		/**
 		 * Return the instance
@@ -138,9 +165,6 @@
 		{
 			return Helper::instance();
 		}
-	
-		// take off
-		//helper();
 	}
 	
 ?>

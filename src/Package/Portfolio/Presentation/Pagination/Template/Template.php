@@ -49,6 +49,22 @@ if (!class_exists('\Ababilitworld\FlexPortfolioByAbabilitworld\Package\Presentat
                 time(), 
                 true
             );
+
+            wp_enqueue_script('jquery');
+            
+            wp_enqueue_style(PLUGIN_PRE_HYPH . '-style', PLUGIN_URL.'/Presentation/Template/Asset/css/style.css', array(), time());
+            wp_enqueue_script(PLUGIN_PRE_HYPH . '-script', PLUGIN_URL.'/Presentation/Template/Asset/js/script.js', array(), time(), true);
+        
+            wp_enqueue_style(PLUGIN_PRE_HYPH . '-template-style', PLUGIN_URL.'/Presentation/Template/Asset/css/portfolio-template.css', array(), time());
+
+            wp_enqueue_style(PLUGIN_PRE_HYPH . '-modal-style', PLUGIN_URL.'/Presentation/Template/Asset/css/modal.css', array(), time());
+            wp_enqueue_script(PLUGIN_PRE_HYPH . '-modal-script', PLUGIN_URL.'/Presentation/Template/Asset/js/modal.js', array(), time(), true);
+
+            wp_enqueue_style(PLUGIN_PRE_HYPH . '-lightbox-style', PLUGIN_URL.'/Presentation/Template/Asset/css/lightbox.css', array(), time());
+            wp_enqueue_script(PLUGIN_PRE_HYPH . '-lightbox-script', PLUGIN_URL.'/Presentation/Template/Asset/js/lightbox.js', array(), time(), true);
+
+            wp_enqueue_style(PLUGIN_PRE_HYPH . '-category-style', PLUGIN_URL.'/Presentation/Template/Asset/css/category.css', array(), time());
+            wp_enqueue_script(PLUGIN_PRE_HYPH . '-category-script', PLUGIN_URL.'/Presentation/Template/Asset/js/category.js', array('jquery'), time(), true);
             
             wp_localize_script(
                 PLUGIN_PRE_HYPH . '-template-script', 
