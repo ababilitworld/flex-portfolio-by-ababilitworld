@@ -1,5 +1,5 @@
 <?php
-namespace Ababilitworld\FlexPortfolioByAbabilitworld\Package\Presentation\Pagination\Template;
+namespace Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio\Presentation\Pagination\Template;
 
 (defined('ABSPATH') && defined('WPINC')) || die();
 
@@ -18,7 +18,7 @@ use const AbabilItWorld\FlexPortfolioByAbabilitworld\{
     PLUGIN_VERSION
 };
 
-if (!class_exists('\Ababilitworld\FlexPortfolioByAbabilitworld\Package\Presentation\Pagination\Template\Template')) 
+if (!class_exists('\Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio\Presentation\Pagination\Template\Template')) 
 {
     class Template 
     {
@@ -37,46 +37,17 @@ if (!class_exists('\Ababilitworld\FlexPortfolioByAbabilitworld\Package\Presentat
         {
             wp_enqueue_style(
                 PLUGIN_PRE_HYPH . '-template-style', 
-                PLUGIN_URL . '/Presentation/Template/Asset/css/style.css',
+                PLUGIN_URL . '/src/Package/Portfolio/Presentation/Pagination/Template/Asset/css/pagination.css',
                 array(), 
                 time()
             );
 
             wp_enqueue_script(
                 PLUGIN_PRE_HYPH . '-template-script', 
-                PLUGIN_URL . '/Presentation/Template/Asset/js/script.js',
+                PLUGIN_URL . '/src/Package/Portfolio/Presentation/Pagination/Template/Asset/js/pagination.js',
                 array(), 
                 time(), 
                 true
-            );
-
-            wp_enqueue_script('jquery');
-            
-            wp_enqueue_style(PLUGIN_PRE_HYPH . '-style', PLUGIN_URL.'/Presentation/Template/Asset/css/style.css', array(), time());
-            wp_enqueue_script(PLUGIN_PRE_HYPH . '-script', PLUGIN_URL.'/Presentation/Template/Asset/js/script.js', array(), time(), true);
-        
-            wp_enqueue_style(PLUGIN_PRE_HYPH . '-template-style', PLUGIN_URL.'/Presentation/Template/Asset/css/portfolio-template.css', array(), time());
-
-            wp_enqueue_style(PLUGIN_PRE_HYPH . '-modal-style', PLUGIN_URL.'/Presentation/Template/Asset/css/modal.css', array(), time());
-            wp_enqueue_script(PLUGIN_PRE_HYPH . '-modal-script', PLUGIN_URL.'/Presentation/Template/Asset/js/modal.js', array(), time(), true);
-
-            wp_enqueue_style(PLUGIN_PRE_HYPH . '-lightbox-style', PLUGIN_URL.'/Presentation/Template/Asset/css/lightbox.css', array(), time());
-            wp_enqueue_script(PLUGIN_PRE_HYPH . '-lightbox-script', PLUGIN_URL.'/Presentation/Template/Asset/js/lightbox.js', array(), time(), true);
-
-            wp_enqueue_style(PLUGIN_PRE_HYPH . '-category-style', PLUGIN_URL.'/Presentation/Template/Asset/css/category.css', array(), time());
-            wp_enqueue_script(PLUGIN_PRE_HYPH . '-category-script', PLUGIN_URL.'/Presentation/Template/Asset/js/category.js', array('jquery'), time(), true);
-            
-            wp_localize_script(
-                PLUGIN_PRE_HYPH . '-template-script', 
-                PLUGIN_PRE_UNDS . '_template_localize', 
-                array(
-                    'adminAjaxUrl' => admin_url('admin-ajax.php'),
-                    'ajaxUrl' => admin_url('admin-ajax.php'),
-                    'ajaxNonce' => wp_create_nonce(PLUGIN_PRE_UNDS . '_nonce'),
-                    'ajaxAction' => PLUGIN_PRE_UNDS . '_action',
-                    'ajaxData' => PLUGIN_PRE_UNDS . '_data',
-                    'ajaxError' => PLUGIN_PRE_UNDS . '_error',
-                )
             );
         }
 
@@ -101,13 +72,15 @@ if (!class_exists('\Ababilitworld\FlexPortfolioByAbabilitworld\Package\Presentat
             <?php
         }
 
-        public function default_pagination_template(array $data) 
+        public static function default_pagination_template(array $data) 
         {
-            if ($data['pagination_links'])
+            if (array_key_exists('pagination_links',$data) && is_array($data['pagination_links']))
             {
+                //echo "<Pre>";print_r($data);echo "</pre>";exit;
+                $pagination_links = join("\n", $data['pagination_links']);
             ?>
             
-                <div class="pagination" data-current-page="<?php echo esc_attr($data['paged']); ?>"><?php join("\n", $data['pagination_links']); ?></div>
+                <div class="pagination" data-current-page="<?php echo esc_attr($data['paged']); ?>"><?php echo $pagination_links; ?></div>
                 
             <?php
             }

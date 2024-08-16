@@ -20,7 +20,6 @@
 .ababilitworld .fpba .pagination .page-numbers:focus
 {
     background-color: #f1f1f1;
-    color: #0073aa;
 }
 
 .ababilitworld .fpba .pagination .current 
@@ -29,4 +28,3 @@
     color: #fff;
     border-color: #0073aa;
 }
-

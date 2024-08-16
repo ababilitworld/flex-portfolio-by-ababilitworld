@@ -4,9 +4,10 @@ namespace Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio;
 use Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio\Template\Template;
 use Ababilitworld\FlexTraitByAbabilitworld\Standard\Standard;
 use function AbabilItWorld\{
+    FlexPortfolioByAbabilitworld\Package\Portfolio\Presentation\Pagination\Pagination as pagination_helper,
     FlexPortfolioByAbabilitworld\Package\Portfolio\Helper\helper as portfolio_helper,
     FlexPortfolioByAbabilitworld\Package\Portfolio\Setting\setting as setting,
-    FlexPortfolioByAbabilitworld\Package\Portfolio\Presentation\Template\helper as portfolio_template,
+    FlexPortfolioByAbabilitworld\Package\Portfolio\Presentation\Template\template as portfolio_template,
     FlexPaginationByAbabilitworld\Package\Service\service as pagination
 };
 
@@ -27,7 +28,9 @@ if (!class_exists('Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio\
     class Portfolio 
     {
         use Standard;
+        private $pagination_helper;
         private $portfolio_helper;
+        private $portfolio_template;
         private $settings;
 
         public function __construct() 
@@ -45,54 +48,60 @@ if (!class_exists('Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio\
             add_action('wp_ajax_load_portfolio_by_category', array($this,'load_portfolio_by_category'));
             add_action('wp_ajax_nopriv_load_portfolio_by_category', array($this,'load_portfolio_by_category'));
             add_filter('use_block_editor_for_post_type', array($this, 'disable_gutenberg'), 10, 2);
+            $this->pagination_helper = pagination_helper();
             $this->portfolio_helper = portfolio_helper();
-            $this->settings = setting();            
+            $this->portfolio_template = portfolio_template();
+            $this->settings = setting(); 
+            add_theme_support('post-thumbnails');           
         }
 
         public function post_type() 
         {
             $post_menu_icon = "dashicons-admin-post";
-            $post_slug = "fpfolio";
+            $post_slug = "";
 
             $labels = [
-                'name' => esc_html__('Portfolios', 'flex-portfolio-by-ababilitworld'),
-                'singular_name' => esc_html__('Portfolio', 'flex-portfolio-by-ababilitworld'),
-                'menu_name' => esc_html__('Portfolios', 'flex-portfolio-by-ababilitworld'),
-                'name_admin_bar' => esc_html__('Portfolios', 'flex-portfolio-by-ababilitworld'),
-                'archives' => esc_html__('Portfolio List', 'flex-portfolio-by-ababilitworld'),
-                'attributes' => esc_html__('Portfolio List', 'flex-portfolio-by-ababilitworld'),
-                'parent_item_colon' => esc_html__('Portfolio Item : ', 'flex-portfolio-by-ababilitworld'),
-                'all_items' => esc_html__('All Portfolio', 'flex-portfolio-by-ababilitworld'),
-                'add_new_item' => esc_html__('Add new Portfolio', 'flex-portfolio-by-ababilitworld'),
-                'add_new' => esc_html__('Add new Portfolio', 'flex-portfolio-by-ababilitworld'),
-                'new_item' => esc_html__('New Portfolio', 'flex-portfolio-by-ababilitworld'),
-                'edit_item' => esc_html__('Edit Portfolio', 'flex-portfolio-by-ababilitworld'),
-                'update_item' => esc_html__('Update Portfolio', 'flex-portfolio-by-ababilitworld'),
-                'view_item' => esc_html__('View Portfolio', 'flex-portfolio-by-ababilitworld'),
-                'view_items' => esc_html__('View Portfolios', 'flex-portfolio-by-ababilitworld'),
-                'search_items' => esc_html__('Search Portfolios', 'flex-portfolio-by-ababilitworld'),
-                'not_found' => esc_html__('Portfolio Not found', 'flex-portfolio-by-ababilitworld'),
-                'not_found_in_trash' => esc_html__('Portfolio Not found in Trash', 'flex-portfolio-by-ababilitworld'),
-                'featured_image' => esc_html__('Portfolio Feature Image', 'flex-portfolio-by-ababilitworld'),
-                'set_featured_image' => esc_html__('Set Portfolio Feature Image', 'flex-portfolio-by-ababilitworld'),
-                'remove_featured_image' => esc_html__('Remove Feature Image', 'flex-portfolio-by-ababilitworld'),
-                'use_featured_image' => esc_html__('Use as Portfolio featured image', 'flex-portfolio-by-ababilitworld'),
-                'insert_into_item' => esc_html__('Insert into Portfolio', 'flex-portfolio-by-ababilitworld'),
-                'uploaded_to_this_item' => esc_html__('Uploaded to this ', 'flex-portfolio-by-ababilitworld'),
-                'items_list' => esc_html__('Portfolio list', 'flex-portfolio-by-ababilitworld'),
-                'items_list_navigation' => esc_html__('Portfolio list navigation', 'flex-portfolio-by-ababilitworld'),
-                'filter_items_list' => esc_html__('Filter Portfolio List', 'flex-portfolio-by-ababilitworld')
+                'name' => esc_html__('Portfolios', 'xyz-portfolio'),
+                'singular_name' => esc_html__('Portfolio', 'xyz-portfolio'),
+                'menu_name' => esc_html__('Portfolios', 'xyz-portfolio'),
+                'name_admin_bar' => esc_html__('Portfolios', 'xyz-portfolio'),
+                'archives' => esc_html__('Portfolio List', 'xyz-portfolio'),
+                'attributes' => esc_html__('Portfolio List', 'xyz-portfolio'),
+                'parent_item_colon' => esc_html__('Portfolio Item : ', 'xyz-portfolio'),
+                'all_items' => esc_html__('All Portfolio', 'xyz-portfolio'),
+                'add_new_item' => esc_html__('Add new Portfolio', 'xyz-portfolio'),
+                'add_new' => esc_html__('Add new Portfolio', 'xyz-portfolio'),
+                'new_item' => esc_html__('New Portfolio', 'xyz-portfolio'),
+                'edit_item' => esc_html__('Edit Portfolio', 'xyz-portfolio'),
+                'update_item' => esc_html__('Update Portfolio', 'xyz-portfolio'),
+                'view_item' => esc_html__('View Portfolio', 'xyz-portfolio'),
+                'view_items' => esc_html__('View Portfolios', 'xyz-portfolio'),
+                'search_items' => esc_html__('Search Portfolios', 'xyz-portfolio'),
+                'not_found' => esc_html__('Portfolio Not found', 'xyz-portfolio'),
+                'not_found_in_trash' => esc_html__('Portfolio Not found in Trash', 'xyz-portfolio'),
+                'featured_image' => esc_html__('Portfolio Feature Image', 'xyz-portfolio'),
+                'set_featured_image' => esc_html__('Set Portfolio Feature Image', 'xyz-portfolio'),
+                'remove_featured_image' => esc_html__('Remove Feature Image', 'xyz-portfolio'),
+                'use_featured_image' => esc_html__('Use as Portfolio featured image', 'xyz-portfolio'),
+                'insert_into_item' => esc_html__('Insert into Portfolio', 'xyz-portfolio'),
+                'uploaded_to_this_item' => esc_html__('Uploaded to this ', 'xyz-portfolio'),
+                'items_list' => esc_html__('Portfolio list', 'xyz-portfolio'),
+                'items_list_navigation' => esc_html__('Portfolio list navigation', 'xyz-portfolio'),
+                'filter_items_list' => esc_html__('Filter Portfolio List', 'xyz-portfolio')
             ];
+
             $args = array(
                 'public' => true,
-                'labels' => $labels,                    
-                'menu_icon' => $post_menu_icon,                    
+                'labels' => $labels,
+                'menu_icon' => $post_menu_icon,
                 'rewrite' => array('slug' => $post_slug),
-                'supports' => array('title', 'thumbnail', 'editor'),
-                'taxonomies' => array('category','post_tag'),
+                'supports' => array('title', 'thumbnail', 'editor'), // 'thumbnail' ensures featured image support
+                'taxonomies' => array('category', 'post_tag'),
             );
+
             register_post_type('fpfolio', $args);
         }
+
         public function page()
         {
             $portfolio_page = get_page_by_path(PLUGIN_PRE_HYPH.'-list');
@@ -128,7 +137,7 @@ if (!class_exists('Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio\
 
         public function render()
         {
-            if (is_admin()) 
+            if  (is_admin()) 
             {
                 $paged = isset($_GET['paged']) ? intval($_GET['paged']) : 1;
             }
@@ -141,7 +150,7 @@ if (!class_exists('Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio\
                 'post_type'      => 'fpfolio',
                 'posts_per_page' => 1,
                 'paged'          => $paged,
-                'page'           => 'flex-portfolio-by-ababilitworld',
+                'page'           => 'flex-portfolio-by-ababilitworld', 
                 'orderby'        => 'date',
                 'order'          => 'DESC',
             );
@@ -152,10 +161,14 @@ if (!class_exists('Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio\
         {
             $query = $this->portfolio_helper::wp_query($attribute);
 
-            echo "<pre>";print_r($query);echo "</pre>";exit;
+            //echo "<pre>";print_r($query);echo "</pre>";//exit;
             
             ob_start();
             ?>
+            <div class="ababilitworld">
+                <div  class="fpba">
+
+                
             <div class="stmfs">
                 <div class="portfolio-template-wrap">
                     <div class="header">
@@ -164,20 +177,19 @@ if (!class_exists('Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio\
             <?php
             if ($query->have_posts()) 
             {
-                Template::category_list($query);
+                //echo "<pre>"; print_r($query); echo "</pre>";
+
+                $this->portfolio_template::category_list($query);
                 ?>
                 <div class="portfolio-wrap">
                 <?php
-                Template::portfolio_default_list($query);
-                //PortfolioHelper::render($query,$attribute);
-                $pagination = pagination();
-                $pagination->init(array('query'=>$query,'attribute'=>$attribute));
-                $pagination->paginate();
-                $pagination->render();
+                $this->portfolio_template::portfolio_default_list($query);
+                $this->pagination_helper->init(array('query'=>$query,'attribute'=>$attribute));
+                $this->pagination_helper->paginate();
                 ?>
                 </div>
                 <?php
-                Template::lightbox();
+                $this->portfolio_template::lightbox();
                 wp_reset_postdata();
             }
             else
@@ -187,6 +199,8 @@ if (!class_exists('Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio\
                 <?php
             }
             ?>
+                        </div>
+                    </div>
                 </div>
             </div>
             <?php
@@ -195,13 +209,13 @@ if (!class_exists('Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio\
 
         public function category_portfolio_list($attribute) 
         {
-            $query = CoreFunction::wp_query($attribute);
+            $query = $this->portfolio_helper::wp_query($attribute);
             
             ob_start();
             if ($query->have_posts()) 
             {                
-                Template::portfolio_default_list($query);
-                PortfolioHelper::render($query,$attribute);
+                $this->portfolio_template::portfolio_default_list($query);
+                $this->portfolio_template::render($query,$attribute);
                 wp_reset_postdata();
             }
             else
