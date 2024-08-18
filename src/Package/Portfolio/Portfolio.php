@@ -4,7 +4,7 @@ namespace Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio;
 use Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio\Template\Template;
 use Ababilitworld\FlexTraitByAbabilitworld\Standard\Standard;
 use function AbabilItWorld\{
-    FlexPortfolioByAbabilitworld\Package\Portfolio\Presentation\Pagination\Pagination as pagination_helper,
+    FlexPaginationByAbabilitworld\Package\Service\service as pagination_helper,
     FlexPortfolioByAbabilitworld\Package\Portfolio\Helper\helper as portfolio_helper,
     FlexPortfolioByAbabilitworld\Package\Portfolio\Setting\setting as setting,
     FlexPortfolioByAbabilitworld\Package\Portfolio\Presentation\Template\template as portfolio_template,
@@ -23,7 +23,7 @@ use const AbabilItWorld\{
 
 (defined( 'ABSPATH' ) && defined( 'WPINC' )) || exit();
 
-if (!class_exists('Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio\Portfolio')) 
+if (!class_exists(__NAMESPACE__.'\Portfolio')) 
 {
     class Portfolio 
     {
@@ -150,10 +150,12 @@ if (!class_exists('Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio\
                 'post_type'      => 'fpfolio',
                 'posts_per_page' => 1,
                 'paged'          => $paged,
-                'page'           => 'flex-portfolio-by-ababilitworld', 
+                'page'           => 'flex-portfolio-by-ababilitworld',
+                'admin_url'      => admin_url('edit.php?post_type=fpfolio&page=flex-portfolio-by-ababilitworld'),
                 'orderby'        => 'date',
                 'order'          => 'DESC',
             );
+            //echo "<pre>";print_r($attribute);echo "</pre>";
             echo $this->portfolio_list($attribute);
         }
 
