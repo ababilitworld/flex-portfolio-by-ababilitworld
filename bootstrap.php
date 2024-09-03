@@ -9,7 +9,7 @@ class BootstrapFlexPortfolioByAbabilitworld
 
     public function __construct() 
     {
-        add_action('admin_menu', array($this, 'register_loaded_classes_menu'));
+        //add_action('admin_menu', array($this, 'register_loaded_classes_menu'));
     }
 
     public function init($prefix, $base_dir) 
@@ -141,7 +141,7 @@ class BootstrapFlexPortfolioByAbabilitworld
 // Instantiate the autoload
 $bootstrap = new BootstrapFlexPortfolioByAbabilitworld();
 $bootstrap->init('AbabilItWorld\\FlexPortfolioByAbabilitworld', __DIR__ . '/src');
-$bootstrap->include_composer_autoload();
+//$bootstrap->include_composer_autoload();
 $bootstrap->include_files_in_directory(__DIR__ . '/src');
 
 

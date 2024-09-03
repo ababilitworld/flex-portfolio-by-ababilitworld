@@ -52,7 +52,7 @@ if (!class_exists('Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio\
         {
             $portfolio_id = get_the_ID();
             ?>
-            <div class="stmfs">
+            <div class="fpba">
                 <div class="meta-box">
                     <div class="loader-container">
                         <div class="loader-spinner"></div>

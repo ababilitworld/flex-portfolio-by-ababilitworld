@@ -26,9 +26,11 @@ if (!class_exists('\Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio
 
         private $package;
         private $template_url;
+        private $asset_url;
 
         public function __construct() 
         {
+            $this->asset_url = $this->get_url('Asset/');
             add_action('admin_enqueue_scripts', array($this, 'enqueue_scripts' ) );
             add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts' ) );
         }
@@ -38,72 +40,72 @@ if (!class_exists('\Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio
             wp_enqueue_script('jquery');
 
             wp_enqueue_style(
-                PLUGIN_PRE_HYPH . '-template-style', 
-                PLUGIN_URL . '/src/Package/Portfolio/Presentation/Template/Asset/css/style.css',
+                'flex-portfolio-by-ababilitworld-template-style', 
+                $this->asset_url.'css/style.css',
                 array(), 
                 time()
             );
 
             wp_enqueue_script(
-                PLUGIN_PRE_HYPH . '-template-script', 
-                PLUGIN_URL . '/src/Package/Portfolio/Presentation/Template/Asset/js/script.js',
+                'flex-portfolio-by-ababilitworld-template-script', 
+                $this->asset_url.'js/script.js',
                 array(), 
                 time(), 
                 true
             );
         
             wp_enqueue_style(
-                PLUGIN_PRE_HYPH . '-portfolio-template-style', 
-                PLUGIN_URL.'/src/Package/Portfolio/Presentation/Template/Asset/css/portfolio-template.css', 
+                'flex-portfolio-by-ababilitworld-portfolio-template-style', 
+                $this->asset_url.'css/portfolio-template.css', 
                 array(), 
                 time()
             );
 
             wp_enqueue_style(
-                PLUGIN_PRE_HYPH . '-modal-style', 
-                PLUGIN_URL.'/src/Package/Portfolio/Presentation/Template/Asset/css/modal.css', 
+                'flex-portfolio-by-ababilitworld-modal-style', 
+                $this->asset_url.'css/modal.css', 
                 array(), 
                 time()
             );
             wp_enqueue_script(
-                PLUGIN_PRE_HYPH . '-modal-script', 
-                PLUGIN_URL.'/src/Package/Portfolio/Presentation/Template/Asset/js/modal.js', 
+                'flex-portfolio-by-ababilitworld-modal-script', 
+                $this->asset_url.'js/modal.js', 
                 array(), 
                 time(), 
                 true
             );
 
             wp_enqueue_style(
-                PLUGIN_PRE_HYPH . '-lightbox-style', 
-                PLUGIN_URL.'/src/Package/Portfolio/Presentation/Template/Asset/css/lightbox.css', 
+                'flex-portfolio-by-ababilitworld-lightbox-style', 
+                $this->asset_url.'css/lightbox.css', 
                 array(), 
                 time()
             );
             wp_enqueue_script(
-                PLUGIN_PRE_HYPH . '-lightbox-script', 
-                PLUGIN_URL.'/src/Package/Portfolio/Presentation/Template/Asset/js/lightbox.js', 
+                'flex-portfolio-by-ababilitworld-lightbox-script', 
+                $this->asset_url.'js/lightbox.js', 
                 array(), 
                 time(),
                 true
             );
 
             wp_enqueue_style(
-                PLUGIN_PRE_HYPH . '-category-style', 
-                PLUGIN_URL.'/src/Package/Portfolio/Presentation/Template/Asset/css/category.css', 
+                'flex-portfolio-by-ababilitworld-category-style', 
+                $this->asset_url.'css/category.css', 
                 array(), 
                 time()
             );
             wp_enqueue_script(
-                PLUGIN_PRE_HYPH . '-category-script', 
-                PLUGIN_URL.'/src/Package/Portfolio/Presentation/Template/Asset/js/category.js', 
+                'flex-portfolio-by-ababilitworld-category-script', 
+                $this->asset_url.'js/category.js', 
                 array('jquery'), 
                 time(), 
                 true
             );
             
             wp_localize_script(
-                PLUGIN_PRE_HYPH . '-template-script', 
-                PLUGIN_PRE_UNDS . '_template_localize', 
+                'flex-portfolio-by-ababilitworld-template-script', 
+                'flex_portfolio_by_ababilitworld_template_localize', 
                 array(
                     'adminAjaxUrl' => admin_url('admin-ajax.php'),
                     'ajaxUrl' => admin_url('admin-ajax.php'),
@@ -114,40 +116,7 @@ if (!class_exists('\Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio
                 )
             );
         }
-
-        public static function render_pagination(array $paginationData) 
-        {
-            ?>
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <?php            
-                        for ($i = 1; $i <= $paginationData['total_pages']; $i++) 
-                        {
-                    ?>
-                    <li class="page-item <?php echo ($i == $paginationData['current_page'] ? 'active' : '') ?> " >
-                    <a class="page-link" href="?page=<?php echo esc_attr($i) ?>"><?php echo esc_html($i); ?></a>
-                    </li>
-                    <?php
-                        }
-                    ?>
-                
-                </ul>
-            </nav>
-            <?php
-        }
-
-        public function default_pagination_template(array $data) 
-        {
-            if ($data['pagination_links'])
-            {
-            ?>
-            
-                <div class="pagination" data-current-page="<?php echo esc_attr($data['paged']); ?>"><?php join("\n", $data['pagination_links']); ?></div>
-                
-            <?php
-            }
-        }
-
+        
         public static function category_list($query)
         {            
             ?>

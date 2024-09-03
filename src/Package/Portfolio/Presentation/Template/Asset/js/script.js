@@ -46,12 +46,12 @@
     }
     
     function xyz_portfolio_loader(target) {
-        target.addClass('stmfs loader loader-spinner');
+        target.addClass('fpba loader loader-spinner');
     }
     
     function xyz_portfolio_loader_remove(target) {
         target.each(function () {
-            target.removeClass('stmfs loader loader-spinner');
+            target.removeClass('fpba loader loader-spinner');
         })
     }
     
@@ -65,7 +65,7 @@
     
     $(document).ready(function () {
     
-        $('.stmfs #portfolio-form').submit(function(event) {
+        $('.fpba #portfolio-form').submit(function(event) {
             event.preventDefault();
     
             var formData = {
@@ -94,11 +94,11 @@
             });
         });
     
-        $('.stmfs #portfolio-form .close').click(function() {
+        $('.fpba #portfolio-form .close').click(function() {
             $('#portfolio-modal').hide();
         });
     
-        $(document).on('click', '.stmfs-install-activate', function (e) {
+        $(document).on('click', '.fpba-install-activate', function (e) {
             e.preventDefault();
     
             let install_action = $(this).data('install-action');
@@ -113,13 +113,13 @@
                         "install_action":install_action
                     },
                     beforeSend: function () {
-                        $('.stmfs .loader-container').show();
+                        $('.fpba .loader-container').show();
                     },
                     success: function (data) {
                         let jsonStartIndex = data.indexOf('{"status":');
                         let jsonString = data.substring(jsonStartIndex);
                         let parsed_data = JSON.parse(jsonString);
-                        $('.stmfs .loader-container').hide();
+                        $('.fpba .loader-container').hide();
                         target.html(parsed_data.message);
                         if (parsed_data.status == 'success') {
                             window.location.replace(xyz_portfolio_site_url);
@@ -131,4 +131,4 @@
     
     });
 
-})(jQuery, document.querySelectorAll('.stmfs .tab-item'), document.querySelectorAll('.stmfs .tab-content'));
+})(jQuery, document.querySelectorAll('.fpba .tab-item'), document.querySelectorAll('.fpba .tab-content'));

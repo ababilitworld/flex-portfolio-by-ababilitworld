@@ -75,7 +75,7 @@ if (!class_exists('Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio\
 
             ?>
             <div class="panel">
-                <div class="stmfs-form-group">
+                <div class="fpba-form-group">
                     <label for="portfolio-images">Portfolio Images:</label>
                     <input type="button" class="button" id="upload-images-button" value="Upload Images">
                     <ul id="portfolio-images-preview">

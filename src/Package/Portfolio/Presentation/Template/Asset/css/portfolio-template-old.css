@@ -1,9 +1,17 @@
 /******************************************************************** Portfolio List ****************************************************/
 @media only screen and (min-width: 10px)
 {
+    .ababilitworld
+    {
+        width:100vh;
+        height:100vh;
+        overflow: scroll;
+    }
+
     .ababilitworld .fpba .portfolio-template-wrap
     {
-        padding: 0;
+        width:100vh;
+        height:100vh;
     }
 
     .ababilitworld .fpba .portfolio-template-wrap .header
@@ -14,7 +22,7 @@
     .ababilitworld .fpba .portfolio-template-wrap .portfolio-container 
 	{
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(249px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         grid-gap: 20px;
 		padding: 20px;
     }

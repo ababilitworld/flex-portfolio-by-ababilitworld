@@ -1,5 +1,5 @@
 /* The Modal (background) */
-.stmfs .lightbox .modal {
+.fpba .lightbox .modal {
   display: none;
   position: fixed;
   z-index: 999999999;
@@ -12,7 +12,7 @@
 }
 
 /* Modal Content */
-.stmfs .lightbox .modal-content {
+.fpba .lightbox .modal-content {
   display: grid;
   grid-template-rows: 1fr auto auto;
   grid-template-columns: 1fr;
@@ -23,7 +23,7 @@
 }
 
 /* The Close Button */
-.stmfs .lightbox .close {
+.fpba .lightbox .close {
   color: white;
   position: absolute;
   top: 10px;
@@ -33,18 +33,18 @@
   cursor: pointer;
 }
 
-.stmfs .lightbox .close:hover,
-.stmfs .lightbox .close:focus {
+.fpba .lightbox .close:hover,
+.fpba .lightbox .close:focus {
   color: #999;
   text-decoration: none;
 }
 
 /* Slider */
-.stmfs .lightbox .slider-row {
+.fpba .lightbox .slider-row {
   position: relative;
 }
 
-.stmfs .lightbox .slideshow {
+.fpba .lightbox .slideshow {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -52,12 +52,12 @@
   overflow: hidden;
 }
 
-.stmfs .lightbox .mySlides {
+.fpba .lightbox .mySlides {
   display: none;
   text-align: center;
 }
 
-.stmfs .lightbox .numbertext {
+.fpba .lightbox .numbertext {
   color: white;
   font-size: 12px;
   padding: 8px 12px;
@@ -67,13 +67,13 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.stmfs .lightbox .slider-image {
+.fpba .lightbox .slider-image {
   width: 100%;
   height: auto;
 }
 
-.stmfs .lightbox .prev,
-.stmfs .lightbox .next {
+.fpba .lightbox .prev,
+.fpba .lightbox .next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -86,28 +86,28 @@
   padding: 10px;
 }
 
-.stmfs .lightbox .prev:hover,
-.stmfs .lightbox .next:hover {
+.fpba .lightbox .prev:hover,
+.fpba .lightbox .next:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-.stmfs .lightbox .prev {
+.fpba .lightbox .prev {
   left: 0;
 }
 
-.stmfs .lightbox .next {
+.fpba .lightbox .next {
   right: 0;
 }
 
 /* Image Name */
-.stmfs .lightbox .image-name-row {
+.fpba .lightbox .image-name-row {
   text-align: center;
   color: white;
   padding: 10px 0;
 }
 
 /* Thumbnail Controls */
-.stmfs .lightbox .thumbnail-row {
+.fpba .lightbox .thumbnail-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 10px;
@@ -115,18 +115,18 @@
   align-items: center;
 }
 
-.stmfs .lightbox .thumbnail-row img {
+.fpba .lightbox .thumbnail-row img {
   width: 100%;
   height: auto;
   cursor: pointer;
 }
 
-.stmfs .lightbox .demo {
+.fpba .lightbox .demo {
   opacity: 0.6;
   transition: opacity 0.6s;
 }
 
-.stmfs .lightbox .active,
-.stmfs .lightbox .demo:hover {
+.fpba .lightbox .active,
+.fpba .lightbox .demo:hover {
   opacity: 1;
 }

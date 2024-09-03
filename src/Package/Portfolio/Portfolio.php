@@ -148,7 +148,7 @@ if (!class_exists(__NAMESPACE__.'\Portfolio'))
 
             $attribute = array(
                 'post_type'      => 'fpfolio',
-                'posts_per_page' => 1,
+                'posts_per_page' => 2,
                 'paged'          => $paged,
                 'page'           => 'flex-portfolio-by-ababilitworld',
                 'admin_url'      => admin_url('edit.php?post_type=fpfolio&page=flex-portfolio-by-ababilitworld'),
@@ -168,40 +168,37 @@ if (!class_exists(__NAMESPACE__.'\Portfolio'))
             ob_start();
             ?>
             <div class="ababilitworld">
-                <div  class="fpba">
-
                 
-            <div class="stmfs">
-                <div class="portfolio-template-wrap">
-                    <div class="header">
-                        <h3>Our Portfolio</h3>
-                    </div>
-            <?php
-            if ($query->have_posts()) 
-            {
-                //echo "<pre>"; print_r($query); echo "</pre>";
-
-                $this->portfolio_template::category_list($query);
-                ?>
-                <div class="portfolio-wrap">
-                <?php
-                $this->portfolio_template::portfolio_default_list($query);
-                $this->pagination_helper->init(array('query'=>$query,'attribute'=>$attribute));
-                $this->pagination_helper->paginate();
-                ?>
-                </div>
-                <?php
-                $this->portfolio_template::lightbox();
-                wp_reset_postdata();
-            }
-            else
-            {
-                ?>
-                <div>No portfolios found</div>
-                <?php
-            }
-            ?>
+                <div class="fpba">
+                    <div class="portfolio-template-wrap">
+                        <div class="header">
+                            <h3>Our Portfolio</h3>
                         </div>
+                    <?php
+                    if ($query->have_posts()) 
+                    {
+                        //echo "<pre>"; print_r($query); echo "</pre>";
+
+                        $this->portfolio_template::category_list($query);
+                        ?>
+                        <div class="portfolio-wrap">
+                        <?php
+                        $this->portfolio_template::portfolio_default_list($query);
+                        $this->pagination_helper->init(array('query'=>$query,'attribute'=>$attribute));
+                        $this->pagination_helper->paginate();
+                        ?>
+                        </div>
+                        <?php
+                        $this->portfolio_template::lightbox();
+                        wp_reset_postdata();
+                    }
+                    else
+                    {
+                        ?>
+                        <div>No portfolios found</div>
+                        <?php
+                    }
+                    ?>
                     </div>
                 </div>
             </div>
@@ -212,21 +209,45 @@ if (!class_exists(__NAMESPACE__.'\Portfolio'))
         public function category_portfolio_list($attribute) 
         {
             $query = $this->portfolio_helper::wp_query($attribute);
+
+            //echo "<pre>";print_r($attribute);echo "</pre>";
             
             ob_start();
-            if ($query->have_posts()) 
-            {                
-                $this->portfolio_template::portfolio_default_list($query);
-                $this->portfolio_template::render($query,$attribute);
-                wp_reset_postdata();
-            }
-            else
-            {
-                ?>
-                <div>No portfolios found</div>
-                <?php
-            }
             ?>
+            <div class="ababilitworld">
+                
+                <div class="fpba">
+                    <div class="portfolio-template-wrap">
+                        <div class="header">
+                            <h3>Our Portfolio</h3>
+                        </div>
+                    <?php
+                    if ($query->have_posts()) 
+                    {
+                        //echo "<pre>"; print_r($query); echo "</pre>";
+
+                        //$this->portfolio_template::category_list($query);
+                        ?>
+                        <div class="portfolio-wrap">
+                        <?php
+                        $this->portfolio_template::portfolio_default_list($query);
+                        $this->pagination_helper->init(array('query'=>$query,'attribute'=>$attribute));
+                        $this->pagination_helper->paginate();
+                        ?>
+                        </div>
+                        <?php
+                        $this->portfolio_template::lightbox();
+                        wp_reset_postdata();
+                    }
+                    else
+                    {
+                        ?>
+                        <div>No portfolios found</div>
+                        <?php
+                    }
+                    ?>
+                    </div>
+                </div>
             </div>
             <?php
             return ob_get_clean();
@@ -238,14 +259,18 @@ if (!class_exists(__NAMESPACE__.'\Portfolio'))
             $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
 
             $attribute = array(
-                'post_type'      => 'flex-portfolio-by-ababilitworld',
-                'posts_per_page' => 1,
+                'post_type'      => 'fpfolio',
+                'posts_per_page' => 2,
                 'paged'          => $paged,
-                'page'           => 'flex-portfolio-by-ababilitworld-list',
+                'page'           => 'flex-portfolio-by-ababilitworld',
+                'admin_url'      => admin_url('edit.php?post_type=fpfolio&page=flex-portfolio-by-ababilitworld'),
                 'orderby'        => 'date',
                 'order'          => 'DESC',
-                'category_id'       => $category_id,
             );
+            if(is_int($category_id))
+            {
+                $attribute['category_id']= $category_id;
+            }
             //echo "<pre>";print_r($attribute);echo "</pre>";
             echo $this->category_portfolio_list($attribute);
             exit;

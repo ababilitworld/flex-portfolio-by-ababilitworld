@@ -59,7 +59,7 @@
 					$args['category_name'] = $attribute['category'];
 				}
 
-				if (isset($attribute['category_id']) && !empty($attribute['category_id'])) 
+				if (isset($attribute['category_id']) && !empty($attribute['category_id']) && is_int($attribute['category_id'])) 
 				{
 					$args['tax_query'] = array(
 						array(
@@ -69,6 +69,8 @@
 						),
 					);
 				}
+
+				//echo "<pre>";print_r(array('args'=>$args,'attr'=>$attribute));echo "</pre>";
 
                 return new \WP_Query($args);
 			}

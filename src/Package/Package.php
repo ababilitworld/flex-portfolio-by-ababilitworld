@@ -91,7 +91,7 @@
 			 */
 			public static function activate(): void 
 			{
-				flush_rewrite_rules();
+				//flush_rewrite_rules();
                 self::run();
 			}
 	

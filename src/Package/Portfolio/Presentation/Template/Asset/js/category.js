@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-    $('.stmfs .category-list a').on('click', function(e) {
+    $('.fpba .category-list a').on('click', function(e) {
         e.preventDefault();
 
         var categoryId = $(this).data('category-id');
@@ -9,8 +9,8 @@ jQuery(document).ready(function($) {
     });
 
     // Function to handle pagination click event
-    $(document).on('click', '.stmfs .pagination a', function(e) {
-        var categoryId = $('.stmfs .category-list a.active').data('category-id');
+    $(document).on('click', '.fpba .pagination a', function(e) {
+        var categoryId = $('.fpba .category-list a.active').data('category-id');
         
         if (categoryId) {
             e.preventDefault();
@@ -21,7 +21,7 @@ jQuery(document).ready(function($) {
 
     function loadPortfolioByCategory(categoryId, paged) {
         $.ajax({
-            url: window.xyz_portfolio_localize_script.ajaxUrl,
+            url: window.flex_portfolio_by_ababilitworld_template_localize.ajaxUrl,
             type: 'POST',
             data: {
                 action: 'load_portfolio_by_category',
@@ -29,9 +29,9 @@ jQuery(document).ready(function($) {
                 paged: paged
             },
             success: function(response) {
-                $('.stmfs .portfolio-wrap').html(response);
-                $('.stmfs .category-list a').removeClass('active');
-                $('.stmfs .category-list a[data-category-id="' + categoryId + '"]').addClass('active');
+                $('.fpba .portfolio-wrap').html(response);
+                $('.fpba .category-list a').removeClass('active');
+                $('.fpba .category-list a[data-category-id="' + categoryId + '"]').addClass('active');
 
                 // Highlight the current pagination link
                 updatePaginationLinks(paged);
@@ -40,17 +40,17 @@ jQuery(document).ready(function($) {
     }
 
     function updatePaginationLinks(currentPage) {
-        $('.stmfs .pagination a').removeClass('current');
-        $('.stmfs .pagination span').removeClass('current');
+        $('.fpba .pagination a').removeClass('current');
+        $('.fpba .pagination span').removeClass('current');
 
-        $('.stmfs .pagination a').each(function() {
+        $('.fpba .pagination a').each(function() {
             var page = $(this).attr('href').split('paged=')[1].split('&')[0];
             if (page == currentPage) {
                 $(this).addClass('current');
             }
         });
 
-        $('.stmfs .pagination span').each(function() {
+        $('.fpba .pagination span').each(function() {
             var page = $(this).text();
             if (page == currentPage) {
                 $(this).addClass('current');
