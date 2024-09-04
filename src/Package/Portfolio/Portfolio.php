@@ -146,7 +146,13 @@ if (!class_exists(__NAMESPACE__.'\Portfolio'))
                 $paged = get_query_var('paged') ? get_query_var('paged') : 1;
             }
 
+            $current_theme = wp_get_theme();
+
+            // Access theme details
+            $current_theme_name = $current_theme->get('Name');
+
             $attribute = array(
+                'theme_name'    => $current_theme_name,
                 'post_type'      => 'fpfolio',
                 'posts_per_page' => 2,
                 'paged'          => $paged,
@@ -167,13 +173,20 @@ if (!class_exists(__NAMESPACE__.'\Portfolio'))
             
             ob_start();
             ?>
-            <div class="ababilitworld">
+            <?php 
+            if($attribute['theme_name'] !== "Eco WP Theme By Ababilitworld")
+            {
+            ?>
+                <div class="ababilitworld">
+            <?php
+            }
+            ?>
                 
                 <div class="fpba">
                     <div class="portfolio-template-wrap">
-                        <div class="header">
+                        <!-- <div class="header">
                             <h3>Our Portfolio</h3>
-                        </div>
+                        </div> -->
                     <?php
                     if ($query->have_posts()) 
                     {
@@ -201,7 +214,14 @@ if (!class_exists(__NAMESPACE__.'\Portfolio'))
                     ?>
                     </div>
                 </div>
-            </div>
+            <?php 
+            if($attribute['theme_name'] !== "Eco WP Theme By Ababilitworld")
+            {
+            ?>
+                </div>
+            <?php
+            }
+            ?>
             <?php
             return ob_get_clean();
         }
@@ -210,17 +230,25 @@ if (!class_exists(__NAMESPACE__.'\Portfolio'))
         {
             $query = $this->portfolio_helper::wp_query($attribute);
 
-            //echo "<pre>";print_r($attribute);echo "</pre>";
+            //echo "<pre>";print_r($attribute);echo "</pre>";            
             
             ob_start();
             ?>
-            <div class="ababilitworld">
+            <?php 
+            if($attribute['theme_name'] !== "Eco WP Theme By Ababilitworld")
+            {
+            ?>
+                <div class="ababilitworld">
+            <?php
+            }
+            ?>
+            
                 
                 <div class="fpba">
                     <div class="portfolio-template-wrap">
-                        <div class="header">
+                        <!-- <div class="header">
                             <h3>Our Portfolio</h3>
-                        </div>
+                        </div> -->
                     <?php
                     if ($query->have_posts()) 
                     {
@@ -248,7 +276,14 @@ if (!class_exists(__NAMESPACE__.'\Portfolio'))
                     ?>
                     </div>
                 </div>
-            </div>
+            <?php 
+            if($attribute['theme_name'] !== "Eco WP Theme By Ababilitworld")
+            {
+            ?>
+                </div>
+            <?php
+            }
+            ?>
             <?php
             return ob_get_clean();
         }
@@ -258,7 +293,12 @@ if (!class_exists(__NAMESPACE__.'\Portfolio'))
             $category_id = intval($_POST['category_id']);
             $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
 
+            $current_theme = wp_get_theme();
+
+            // Access theme details
+            $current_theme_name = $current_theme->get('Name');
             $attribute = array(
+                'theme_name'    => $current_theme_name,
                 'post_type'      => 'fpfolio',
                 'posts_per_page' => 2,
                 'paged'          => $paged,

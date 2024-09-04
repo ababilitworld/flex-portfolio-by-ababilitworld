@@ -26,11 +26,11 @@
 }
 
 .fpba .category-container .category-list li a:hover {
-    background-color: #0073aa;
+    background-color: #148e18;
     color: #fff;
 }
 
 .fpba .category-container .category-list a.active {
-    background-color: #0073aa;
+    background-color: #148e18;
     color: #fff;
 }
