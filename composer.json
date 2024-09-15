@@ -21,7 +21,10 @@
     "autoload": {
         "psr-4": {
             "Ababilitworld\\FlexPortfolioByAbabilitworld\\Package\\": "src/Package/"
-        }
+        },
+        "files": [
+            "includes.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

@@ -10,7 +10,7 @@ use function Ababilitworld\{
     FlexPaginationByAbabilitworld\Package\package as package,
 };
 
-if (!class_exists('\Ababilitworld\FlexPaginationByAbabilitworld\Package\Presentation\Presentation')) 
+if (!class_exists(__NAMESPACE__.'\Presentation')) 
 {
     class Presentation 
     {

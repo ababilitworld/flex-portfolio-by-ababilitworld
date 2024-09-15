@@ -8,7 +8,7 @@ use function Ababilitworld\{
     FlexPackageInfoByAbabilitworld\Package\Service\service as plugin_info,
     FlexPortfolioByAbabilitworld\Package\package as package,
 };
-use const AbabilItWorld\FlexPortfolioByAbabilitworld\{
+use const Ababilitworld\FlexPortfolioByAbabilitworld\{
     PLUGIN_NAME,
     PLUGIN_DIR,
     PLUGIN_URL,

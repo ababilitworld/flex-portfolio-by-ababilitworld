@@ -3,9 +3,12 @@
 
     (defined( 'ABSPATH' ) && defined( 'WPINC' )) || exit();
 
-	use Ababilitworld\FlexTraitByAbabilitworld\Standard\Standard;
+	use Ababilitworld\{
+		FlexTraitByAbabilitworld\Standard\Standard,
+		FlexPortfolioByAbabilitworld\Package\Portfolio\Portfolio as Portfolio,
+	};
 
-	use const AbabilItWorld\FlexPortfolioByAbabilitworld\{
+	use const Ababilitworld\FlexPortfolioByAbabilitworld\{
 		PLUGIN_NAME,
 		PLUGIN_DIR,
         PLUGIN_URL,
@@ -13,36 +16,16 @@
 		PLUGIN_VERSION
 	};
 
-	use function AbabilItWorld\{
-
-		FlexPortfolioByAbabilitworld\Package\Portfolio\portfolio as portfolio,
-		
-	};
-
-	if ( ! class_exists( '\AbabilItWorld\FlexPortfolioByAbabilitworld\Package\Package' ) ) 
+	if ( ! class_exists( __NAMESPACE__.'\Package' ) ) 
 	{
 		/**
 		 * Class Package
 		 *
-		 * @package AbabilItWorld\FlexPortfolioByAbabilitworld\Package
+		 * @package Ababilitworld\FlexPortfolioByAbabilitworld\Package
 		 */
 		class Package 
 		{
 			use Standard;
-
-			/**
-			 * Objcet wp_error
-			 *
-			 * @var object
-			 */
-			private $wp_error;
-
-			/**
-			 * Objcet wp_function
-			 *
-			 * @var object
-			 */
-			private $wp_function;
 	
 			/**
 			 * Package version
@@ -64,7 +47,7 @@
 
 			public function init()
 			{
-				$this->portfolio  = portfolio();
+				$this->portfolio  = Portfolio::instance();
 			}
 	
 			/**
@@ -115,24 +98,8 @@
 				delete_option(PLUGIN_NAME . '-installed');
 				delete_option(PLUGIN_NAME . '-version');
 				flush_rewrite_rules();
-			}
-
-			
-
-			
-	
-		}
-
-		/**
-		 * Return the instance
-		 *
-		 * @return \AbabilItWorld\FlexPortfolioByAbabilitworld\Package\Package
-		 */
-		function package() 
-		{
-			return \AbabilItWorld\FlexPortfolioByAbabilitworld\Package\Package::instance();
+			}	
 		}
 
 	}
 	
-?>

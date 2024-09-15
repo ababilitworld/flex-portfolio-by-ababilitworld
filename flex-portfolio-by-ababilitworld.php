@@ -32,28 +32,19 @@
 	/**
 	 * Bootstrap the plugin.
 	 */
-	namespace AbabilItWorld\FlexPortfolioByAbabilitworld;
+	namespace Ababilitworld\FlexPortfolioByAbabilitworld;
 
 	(defined('ABSPATH') && defined('WPINC')) || die();
 
 	require_once __DIR__ . '/bootstrap.php';
 
-	defined( __NAMESPACE__.'\PLUGIN_NAME' ) || define( __NAMESPACE__.'\PLUGIN_NAME', plugin_basename(__FILE__) );
-	defined( __NAMESPACE__.'\PLUGIN_VERSION' ) || define( __NAMESPACE__.'\PLUGIN_VERSION', '1.0.0' );
-	defined( __NAMESPACE__.'\PLUGIN_DIR' ) || define( __NAMESPACE__.'\PLUGIN_DIR', dirname( __FILE__ ) );
-	defined( __NAMESPACE__.'\PLUGIN_FILE' ) || define( __NAMESPACE__.'\PLUGIN_FILE', __FILE__ );
-	defined( __NAMESPACE__.'\PLUGIN_URL' ) || define( __NAMESPACE__.'\PLUGIN_URL', plugins_url() . '/' . plugin_basename( dirname( __FILE__ ) ) );
-	defined( __NAMESPACE__.'\PLUGIN_PRE_UNDS' ) || define( __NAMESPACE__.'\PLUGIN_PRE_UNDS', 'flex_portfolio_by_ababilitworld' );
-	defined( __NAMESPACE__.'\PLUGIN_PRE_HYPH' ) || define( __NAMESPACE__.'\PLUGIN_PRE_HYPH', 'flex-portfolio-by-ababilitworld' );
-	
-
-	use function Ababilitworld\{
-		FlexPortfolioByAbabilitworld\Package\package,
+	use Ababilitworld\{
+		FlexPortfolioByAbabilitworld\Package\Package,
 	};
 	
-	$package = package();
+	$package = Package::instance(); 
 		
 	register_activation_hook(__FILE__, [$package, 'activate']);
 	register_deactivation_hook(__FILE__, [$package, 'deactivate']);
+
 	
-?>

@@ -1,28 +1,20 @@
 <?php
-    namespace Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio\Helper;
+    namespace Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio\Service;
 
     (defined( 'ABSPATH' ) && defined( 'WPINC' )) || exit();
 
-	use Ababilitworld\FlexTraitByAbabilitworld\Standard\Standard;
-	use const AbabilItWorld\FlexPortfolioByAbabilitworld\{
-		PLUGIN_NAME,
-		PLUGIN_DIR,
-        PLUGIN_URL,
-		PLUGIN_FILE,
-		PLUGIN_VERSION
+	use Ababilitworld\{
+		FlexTraitByAbabilitworld\Standard\Standard
 	};
-    use function Ababilitworld\{
-        FlexPortfolioByAbabilitworld\Package\Portfolio\Presentation\Pagination\Template\template as pagination_template,
-    };
-
-	if ( ! class_exists( '\AbabilItWorld\FlexPortfolioByAbabilitworld\Package\Portfolio\Helper\Helper' ) ) 
+    
+	if ( ! class_exists( __NAMESPACE__.'\Service' ) ) 
 	{
 		/**
-		 * Class Helper
+		 * Class Service
 		 *
-		 * @package AbabilItWorld\FlexPortfolioByAbabilitworld\Helper
+		 * @package Ababilitworld\FlexPortfolioByAbabilitworld\Service
 		 */
-		class Helper
+		class Service
 		{
 			use Standard;
 	
@@ -75,16 +67,4 @@
                 return new \WP_Query($args);
 			}
         }
-	
-		/**
-		 * Return the instance
-		 *
-		 * @return \AbabilItWorld\FlexPortfolioByAbabilitworld\Package\Portfolio\Helper\Helper
-		 */
-		function helper() 
-		{
-			return Helper::instance();
-		}
 	}
-	
-?>
