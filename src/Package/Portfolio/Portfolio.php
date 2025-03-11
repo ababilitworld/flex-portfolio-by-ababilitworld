@@ -5,7 +5,7 @@
 
     use Ababilitworld\{
         FlexTraitByAbabilitworld\Standard\Standard,
-        FlexPaginationByAbabilitworld\Package\Service\Service as PaginationService,
+        FlexWordpressByAbabilitworld\Package\Pagination\Concrete\Pagination as PaginationService,
         FlexPortfolioByAbabilitworld\Package\Portfolio\Setting\Setting as Setting,
         FlexPortfolioByAbabilitworld\Package\Portfolio\Service\Service as PortfolioService,
         FlexPortfolioByAbabilitworld\Package\Portfolio\Presentation\Template\Template as PortfolioTemplate
@@ -35,11 +35,11 @@
 
             public function __construct() 
             {
-                $this->init();   
+                $this->init(); 
                 
             }
 
-            private function init() 
+            public function init() 
             {
                 add_action('init', array($this, 'post_type'));
                 add_action('wp_loaded', array($this, 'page'));
@@ -158,7 +158,7 @@
                 $attribute = array(
                     'theme_name'    => $current_theme_name,
                     'post_type'      => 'fpfolio',
-                    'posts_per_page' => 2,
+                    'posts_per_page' => 5,
                     'paged'          => $paged,
                     'page'           => 'flex-portfolio-by-ababilitworld',
                     'admin_url'      => admin_url('edit.php?post_type=fpfolio&page=flex-portfolio-by-ababilitworld'),
@@ -173,7 +173,7 @@
             {
                 $query = $this->portfolio_service::wp_query($attribute);
 
-                //echo "<pre>";print_r($query);echo "</pre>";//exit;
+                //echo "<pre>";print_r($query);echo "</pre>";exit;
                 
                 ob_start();
                 ?>
@@ -234,7 +234,7 @@
             {
                 $query = $this->portfolio_service::wp_query($attribute);
 
-                //echo "<pre>";print_r($attribute);echo "</pre>";            
+                //echo "<pre>";print_r($query);echo "</pre>";            
                 
                 ob_start();
                 ?>
@@ -304,7 +304,7 @@
                 $attribute = array(
                     'theme_name'    => $current_theme_name,
                     'post_type'      => 'fpfolio',
-                    'posts_per_page' => 2,
+                    'posts_per_page' => 5,
                     'paged'          => $paged,
                     'page'           => 'flex-portfolio-by-ababilitworld',
                     'admin_url'      => admin_url('edit.php?post_type=fpfolio&page=flex-portfolio-by-ababilitworld'),

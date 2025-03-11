@@ -30,12 +30,6 @@ class ComposerStaticInit03a32f59e37fc115d3788891f4323aa5
     );
 
     public static $classMap = array (
-        'Ababilitworld\\FlexPortfolioByAbabilitworld\\Package\\Package' => __DIR__ . '/../..' . '/src/Package/Package.php',
-        'Ababilitworld\\FlexPortfolioByAbabilitworld\\Package\\Portfolio\\Portfolio' => __DIR__ . '/../..' . '/src/Package/Portfolio/Portfolio.php',
-        'Ababilitworld\\FlexPortfolioByAbabilitworld\\Package\\Portfolio\\Presentation\\Template\\Template' => __DIR__ . '/../..' . '/src/Package/Portfolio/Presentation/Template/Template.php',
-        'Ababilitworld\\FlexPortfolioByAbabilitworld\\Package\\Portfolio\\Service\\Service' => __DIR__ . '/../..' . '/src/Package/Portfolio/Service/Service.php',
-        'Ababilitworld\\FlexPortfolioByAbabilitworld\\Package\\Portfolio\\Setting\\General\\General' => __DIR__ . '/../..' . '/src/Package/Portfolio/Setting/General/General.php',
-        'Ababilitworld\\FlexPortfolioByAbabilitworld\\Package\\Portfolio\\Setting\\Setting' => __DIR__ . '/../..' . '/src/Package/Portfolio/Setting/Setting.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 
