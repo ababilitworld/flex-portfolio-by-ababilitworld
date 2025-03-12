@@ -183,48 +183,7 @@ if (!class_exists(__NAMESPACE__.'\Template'))
                         }                        
                     }
                     ?>
-                </div> 
-                
-                <div class="layout masonry">
-                    <?php
-                        if($query->found_posts > 0) 
-                        {
-                            while ($query->have_posts()) 
-                            {
-                                $query->the_post();
-                                $portfolio_id = get_the_ID();
-                                $title = get_the_title();
-                                $images = get_post_meta($portfolio_id, 'portfolio_images', true);
-                                $image_urls = array();
-                                if(is_array($images) && count($images))
-                                {
-                                    foreach($images as $key => $image)
-                                    {
-                                        $image_urls[] = wp_get_attachment_image_url($image, 'full');
-                                    }
-                                }
-                                ?>
-                                <div class="layout-item" data-id="<?php echo $portfolio_id; ?>" data-title="<?php echo esc_attr($title); ?>" data-images="<?php echo esc_attr(json_encode($image_urls)); ?>">
-                                    <div class="header"></div>
-                                    <div class="content">
-                                        <?php if (has_post_thumbnail($portfolio_id)): ?>
-                                            <?php $image = wp_get_attachment_image_src(get_post_thumbnail_id($portfolio_id), 'single-post-thumbnail'); ?>
-                                            <div>
-                                                <img src="<?php echo $image[0] ?>" />
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <div class="footer">
-                                        <span><b><?php echo $title; ?></b></span>
-                                    </div>
-                                </div>
-                                <?php
-                                wp_reset_postdata();
-                            }                        
-                        }
-                    ?>
-                </div>
-                        
+                </div>                        
             <?php
         }
 
@@ -251,16 +210,6 @@ if (!class_exists(__NAMESPACE__.'\Template'))
                 </div>            
             <?php
         }
-    }
-
-    /**
-     * Return the instance
-     *
-     * @return \Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio\Presentation\Template\Template
-     */
-    function template() 
-    {
-        return \Ababilitworld\FlexPortfolioByAbabilitworld\Package\Portfolio\Presentation\Template\Template::instance();
     }
 }
 

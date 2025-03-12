@@ -33,25 +33,34 @@
             private $portfolio_template;
             private $settings;
 
-            public function __construct() 
+            public function __construct()
             {
-                $this->init(); 
-                
+                $this->init();
             }
 
-            public function init() 
+            private function init()
             {
-                add_action('init', array($this, 'post_type'));
-                add_action('wp_loaded', array($this, 'page'));
-                add_action('admin_menu', array($this, 'admin_menu'));
-                add_shortcode('flex-portfolio-by-ababilitworld-list' , array($this,'render') );
-                add_action('wp_ajax_load_portfolio_by_category', array($this,'load_portfolio_by_category'));
-                add_action('wp_ajax_nopriv_load_portfolio_by_category', array($this,'load_portfolio_by_category'));
-                add_filter('use_block_editor_for_post_type', array($this, 'disable_gutenberg'), 10, 2);
+                $this->init_hooks();
+                $this->init_services();
+            }
+
+            private function init_hooks()
+            {
+                add_action('init', [$this, 'post_type']);
+                add_action('wp_loaded', [$this, 'page']);
+                add_action('admin_menu', [$this, 'admin_menu']);
+                add_shortcode('flex-portfolio-by-ababilitworld-list', [$this, 'render']);
+                add_action('wp_ajax_load_portfolio_by_category', [$this, 'load_portfolio_by_category']);
+                add_action('wp_ajax_nopriv_load_portfolio_by_category', [$this, 'load_portfolio_by_category']);
+                add_filter('use_block_editor_for_post_type', [$this, 'disable_gutenberg'], 10, 2);
+            }
+
+            private function init_services()
+            {
                 $this->pagination_service = PaginationService::instance();
                 $this->portfolio_service = PortfolioService::instance();
                 $this->portfolio_template = PortfolioTemplate::instance();
-                $this->settings = Setting::instance();           
+                $this->settings = Setting::instance();
             }
 
             public function post_type() 
@@ -139,35 +148,68 @@
                 );
             }
 
-            public function render()
+            private function get_attributes()
             {
-                if  (is_admin()) 
+                // Default panel as front-end
+                $panel = 'front';
+                $paged = 1; // Default page number
+
+                // Detect HTTP Method
+                $method = $_SERVER['REQUEST_METHOD'];
+
+                if (is_admin()) 
                 {
-                    $paged = isset($_GET['paged']) ? intval($_GET['paged']) : 1;
-                }
+                    $panel = 'admin';
+
+                    // Admin panel pagination based on HTTP method
+                    if ($method === 'POST') {
+                        $paged = isset($_POST['paged']) ? absint($_POST['paged']) : 1;
+                    } else {
+                        $paged = isset($_GET['paged']) ? absint($_GET['paged']) : 1;
+                    }
+
+                } 
                 else 
                 {
-                    $paged = get_query_var('paged') ? get_query_var('paged') : 1;
+                    // Front-end pagination handling for archives, shortcodes, and custom loops
+                    $paged = get_query_var('paged') ? absint(get_query_var('paged')) : 1;
+
+                    // Fallback to 'page' query var if 'paged' is not set
+                    if ($paged === 1) {
+                        $paged = get_query_var('page') ? absint(get_query_var('page')) : 1;
+                    }
                 }
 
+                // Get current active theme name
                 $current_theme = wp_get_theme();
-
-                // Access theme details
                 $current_theme_name = $current_theme->get('Name');
 
-                $attribute = array(
-                    'theme_name'    => $current_theme_name,
+                // Prepare attributes for portfolio list
+                return array(
+                    'theme_name'     => $current_theme_name,
+                    'panel'          => $panel,
                     'post_type'      => 'fpfolio',
-                    'posts_per_page' => 5,
+                    'posts_per_page' => 2,
                     'paged'          => $paged,
                     'page'           => 'flex-portfolio-by-ababilitworld',
                     'admin_url'      => admin_url('edit.php?post_type=fpfolio&page=flex-portfolio-by-ababilitworld'),
                     'orderby'        => 'date',
                     'order'          => 'DESC',
                 );
-                //echo "<pre>";print_r($attribute);echo "</pre>";
+            }
+
+
+            public function render()
+            {
+               $attribute = $this->get_attributes();
+
+                // Debug: Check attributes
+                //echo "<pre>"; print_r($attribute); echo "</pre>";
+
+                // Output the portfolio list (assuming this method returns HTML)
                 echo $this->portfolio_list($attribute);
             }
+
 
             public function portfolio_list($attribute) 
             {
@@ -178,7 +220,7 @@
                 ob_start();
                 ?>
                 <?php 
-                if(is_admin() ||  $attribute['theme_name'] !== "Eco WP Theme By Ababilitworld")
+                if(is_admin() ||  $attribute['theme_name'] !== "Flex Theme By Ababilitworld")
                 {
                 ?>
                     <div class="ababilitworld">
@@ -219,7 +261,7 @@
                         </div>
                     </div>
                 <?php 
-                if(is_admin() ||  $attribute['theme_name'] !== "Eco WP Theme By Ababilitworld")
+                if(is_admin() ||  $attribute['theme_name'] !== "Flex Theme By Ababilitworld")
                 {
                 ?>
                     </div>
@@ -239,7 +281,7 @@
                 ob_start();
                 ?>
                 <?php 
-                if(is_admin() ||  $attribute['theme_name'] !== "Eco WP Theme By Ababilitworld")
+                if(is_admin() ||  $attribute['theme_name'] !== "Flex Theme By Ababilitworld")
                 {
                 ?>
                     <div class="ababilitworld">
@@ -281,7 +323,7 @@
                         </div>
                     </div>
                 <?php 
-                if(is_admin() ||  $attribute['theme_name'] !== "Eco WP Theme By Ababilitworld")
+                if(is_admin() ||  $attribute['theme_name'] !== "Flex Theme By Ababilitworld")
                 {
                 ?>
                     </div>
@@ -294,23 +336,11 @@
 
             public function load_portfolio_by_category()
             {
+                
+                $attribute = $this->get_attributes();
+
                 $category_id = intval($_POST['category_id']);
-                $paged = isset($_POST['paged']) ? intval($_POST['paged']) : 1;
 
-                $current_theme = wp_get_theme();
-
-                // Access theme details
-                $current_theme_name = $current_theme->get('Name');
-                $attribute = array(
-                    'theme_name'    => $current_theme_name,
-                    'post_type'      => 'fpfolio',
-                    'posts_per_page' => 5,
-                    'paged'          => $paged,
-                    'page'           => 'flex-portfolio-by-ababilitworld',
-                    'admin_url'      => admin_url('edit.php?post_type=fpfolio&page=flex-portfolio-by-ababilitworld'),
-                    'orderby'        => 'date',
-                    'order'          => 'DESC',
-                );
                 if(is_int($category_id))
                 {
                     $attribute['category_id']= $category_id;
